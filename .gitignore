@@ -55,7 +55,3 @@ nunit-*.xml
 
 # Visual Studio
 .vs
-*.csproj
-*.csproj.user
-appsettings.json
-appsettings.Development.json
