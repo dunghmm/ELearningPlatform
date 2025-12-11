@@ -1,4 +1,5 @@
 ﻿using ELearningPlatform.Models.CommonModels;
+using ELearningPlatform.Models.DtoModels.Course;
 using ELearningPlatform.Models.EntityModels;
 using ELearningPlatform.Repository.Interfaces;
 using ELearningPlatform.Services.Interfaces;
@@ -12,9 +13,14 @@ namespace ELearningPlatform.Services.Implements
         {
             _courseRepository = courseRepository;
         }
-        public async Task<ApiResponse> Create(string title)
+        public async Task<ApiResponse> Create(CreateCourseDto dto)
         {
-            var course = new Course { Title = title };
+            var course = new Course { 
+                Title = dto.Title,
+                Subtitle = dto.Subtitle,
+                Description = dto.Description
+            };
+            
             await _courseRepository.CreateAsync(course);
             await _courseRepository.SaveChangesAsync();
             return ApiResponse.Response(DefineResponse.EnumCodes.R_CMN_200_01, data: course.Id);
@@ -26,5 +32,7 @@ namespace ELearningPlatform.Services.Implements
             var courses = await _courseRepository.GetAllAsync();
             return ApiResponse.Response(DefineResponse.EnumCodes.R_CMN_200_01, data: courses);
         }
+
+
     }
 }
