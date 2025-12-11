@@ -56,4 +56,3 @@ nunit-*.xml
 # Visual Studio
 .vs
 *.user
-Models/EntityModels/ELearningContext.cs
