@@ -25,6 +25,8 @@ public partial class ELearningContext : DbContext
 
     public virtual DbSet<LessonContentProgress> LessonContentProgresses { get; set; }
 
+    public virtual DbSet<RefreshToken> RefreshTokens { get; set; }
+
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -231,6 +233,43 @@ public partial class ELearningContext : DbContext
                 .HasConstraintName("FK__lesson_co__user___38996AB5");
         });
 
+        modelBuilder.Entity<RefreshToken>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__refresh___3213E83FC6A55D98");
+
+            entity.ToTable("refresh_tokens");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnName("created_at");
+            entity.Property(e => e.DeleteFlag).HasColumnName("delete_flag");
+            entity.Property(e => e.ExpiresAt).HasColumnName("expires_at");
+            entity.Property(e => e.IpAddress)
+                .HasMaxLength(50)
+                .HasColumnName("ip_address");
+            entity.Property(e => e.IsRevoked).HasColumnName("is_revoked");
+            entity.Property(e => e.ReplacedBy)
+                .HasMaxLength(64)
+                .HasColumnName("replaced_by");
+            entity.Property(e => e.RevokedAt).HasColumnName("revoked_at");
+            entity.Property(e => e.TokenHash)
+                .HasMaxLength(64)
+                .HasColumnName("token_hash");
+            entity.Property(e => e.UpdatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnName("updated_at");
+            entity.Property(e => e.UserAgent)
+                .HasMaxLength(500)
+                .HasColumnName("user_agent");
+            entity.Property(e => e.UserId).HasColumnName("user_id");
+
+            entity.HasOne(d => d.User).WithMany(p => p.RefreshTokens)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__refresh_tokens_users");
+        });
+
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__users__3213E83FD0249377");
@@ -245,6 +284,10 @@ public partial class ELearningContext : DbContext
             entity.Property(e => e.Email)
                 .HasMaxLength(255)
                 .HasColumnName("email");
+            entity.Property(e => e.ForgotPasswordToken)
+                .HasMaxLength(255)
+                .HasColumnName("forgot_password_token");
+            entity.Property(e => e.ForgotPasswordTokenExpire).HasColumnName("forgot_password_token_expire");
             entity.Property(e => e.PasswordHash)
                 .HasMaxLength(500)
                 .HasColumnName("password_hash");
