@@ -22,6 +22,8 @@ namespace LibraryManagement
 
 
             #region Special services
+            services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
+            services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             #endregion
 
             #region Services
