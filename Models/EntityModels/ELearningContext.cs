@@ -6,10 +6,6 @@ namespace ELearningPlatform.Models.EntityModels;
 
 public partial class ELearningContext : DbContext
 {
-    public ELearningContext()
-    {
-    }
-
     public ELearningContext(DbContextOptions<ELearningContext> options)
         : base(options)
     {
