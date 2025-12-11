@@ -13,9 +13,9 @@ namespace ELearningPlatform.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(string name)
+        public async Task<IActionResult> Create(string title)
         {
-            var response = await _courseService.Create(name);
+            var response = await _courseService.Create(title);
             return BaseResult(response);
         }
 
