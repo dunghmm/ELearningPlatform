@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ELearningPlatform.Controllers
 {
+    [Route("api/course")]
+    [ApiController]
     public class CourseController : BaseController
     {
         private readonly ICourseService _courseService;
