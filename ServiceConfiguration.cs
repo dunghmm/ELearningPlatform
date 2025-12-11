@@ -5,7 +5,7 @@ using ELearningPlatform.Services.Implements;
 using ELearningPlatform.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace LibraryManagement
+namespace ELearningPlatform
 {
     public static class ServiceConfiguration
     {
