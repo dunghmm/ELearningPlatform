@@ -1,4 +1,8 @@
 ﻿using ELearningPlatform.Models.EntityModels;
+using ELearningPlatform.Repository.Implements;
+using ELearningPlatform.Repository.Interfaces;
+using ELearningPlatform.Services.Implements;
+using ELearningPlatform.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace LibraryManagement
@@ -21,9 +25,12 @@ namespace LibraryManagement
             #endregion
 
             #region Services
+            services.AddScoped<ICourseService, CourseService>();
             #endregion
 
+
             #region Repositories
+            services.AddScoped<ICourseRepository, CourseRepository>();
             #endregion
 
             return services;
