@@ -56,3 +56,7 @@ nunit-*.xml
 # Visual Studio
 .vs
 *.user
+
+#Secrets
+/appsettings.Development.json
+/appsettings.Development.json
