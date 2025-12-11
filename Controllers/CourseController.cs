@@ -1,4 +1,5 @@
-﻿using ELearningPlatform.Services.Interfaces;
+﻿using ELearningPlatform.Models.DtoModels.Course;
+using ELearningPlatform.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ELearningPlatform.Controllers
@@ -15,9 +16,9 @@ namespace ELearningPlatform.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(string title)
+        public async Task<IActionResult> Create(CreateCourseDto dto)
         {
-            var response = await _courseService.Create(title);
+            var response = await _courseService.Create(dto);
             return BaseResult(response);
         }
 
