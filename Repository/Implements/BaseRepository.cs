@@ -173,8 +173,8 @@ namespace ELearningPlatform.Repository.Implements
         {
             if (_dbContext.Entry(entity).State == EntityState.Unchanged) return Task.CompletedTask;
             entity.UpdatedAt = DateTime.Now;
-            T exist = _dbContext.Set<T>().Find(entity.Id);
-            _dbContext.Entry(exist).CurrentValues.SetValues(entity);
+            T? exist = _dbContext.Set<T>().Find(entity.Id);
+            _dbContext.Entry(exist!).CurrentValues.SetValues(entity);
             return Task.CompletedTask;
         }
 
@@ -333,8 +333,8 @@ namespace ELearningPlatform.Repository.Implements
         {
             if (_dbContext.Entry(entity).State == EntityState.Unchanged) return true;
             entity.UpdatedAt = DateTime.Now;
-            T exist = _dbContext.Set<T>().Find(entity.Id);
-            _dbContext.Entry(exist).CurrentValues.SetValues(entity);
+            T? exist = _dbContext.Set<T>().Find(entity.Id);
+            _dbContext.Entry(exist!).CurrentValues.SetValues(entity);
             return true;
         }
 
