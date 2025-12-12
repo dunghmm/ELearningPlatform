@@ -4,7 +4,9 @@
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
       "serviceActions": {
-        "elearningplatform": "StartDebugging"
+        "elearningplatform": "StartDebugging",
+        "db": "StartWithoutDebugging",
+        "mssql-tools": "StartWithoutDebugging"
       }
     }
   }
