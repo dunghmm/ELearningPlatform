@@ -8,7 +8,7 @@
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
     <DockerServiceName>elearningplatform</DockerServiceName>
-    <DockerComposeProjectName>e_learning_platform</DockerComposeProjectName>
+    <DockerComposeProjectName>elearningplatform</DockerComposeProjectName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.override.yml">
