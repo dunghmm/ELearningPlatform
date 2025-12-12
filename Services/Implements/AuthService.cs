@@ -1,11 +1,24 @@
 ﻿using ELearningPlatform.Models.CommonModels;
 using ELearningPlatform.Models.DtoModels.Auth;
+using ELearningPlatform.Models.EntityModels;
+using ELearningPlatform.Repository.Interfaces;
 using ELearningPlatform.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Crypto.Generators;
 
 namespace ELearningPlatform.Services.Implements
 {
     public class AuthService : IAuthService
     {
+        private readonly IUserRepository _userRepository;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IEmailService _emailService;
+        public AuthService(IUserRepository userRepository, IUnitOfWork unitOfWork, IEmailService emailService)
+        {
+            _userRepository = userRepository;
+            _unitOfWork = unitOfWork;
+            _emailService = emailService;
+        }
         public Task<ApiResponse> LoginAsync(LoginRequestDto dto)
         {
             throw new NotImplementedException();
@@ -16,9 +29,25 @@ namespace ELearningPlatform.Services.Implements
             throw new NotImplementedException();
         }
 
-        public Task<ApiResponse> RegisterAsync(RegisterRequestDto dto)
+        public async Task<ApiResponse> RegisterAsync(RegisterRequestDto dto)
         {
-            throw new NotImplementedException();
+            var user = await _userRepository.FindByCondition(u => u.Username == dto.Username).FirstOrDefaultAsync();
+            if (user != null)
+            {
+                return ApiResponse.Response(DefineResponse.EnumCodes.R_CMN_400_01);
+            }
+            var newUser = new User {
+                Username = dto.Username,
+                Email = dto.Email,
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password),
+                Role = "User"
+
+            };
+            await _userRepository.CreateAsync(newUser);
+
+            await _unitOfWork.CommitAsync();
+            await _emailService.SendEmailAsync(newUser.Email, "Welcome to ELearning Platform", "Thank you for registering!");
+            return ApiResponse.Response(DefineResponse.EnumCodes.R_CMN_200_01);
         }
     }
 }
