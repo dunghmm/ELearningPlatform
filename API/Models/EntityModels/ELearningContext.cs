@@ -33,11 +33,11 @@ public partial class ELearningContext : DbContext
     {
         modelBuilder.Entity<Category>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__categori__3213E83F112E3EF8");
+            entity.HasKey(e => e.Id).HasName("PK__categori__3213E83F65FC07C4");
 
             entity.ToTable("categories");
 
-            entity.HasIndex(e => e.Name, "UQ__categori__72E12F1B5560CDE6").IsUnique();
+            entity.HasIndex(e => e.Name, "UQ__categori__72E12F1BDDE291ED").IsUnique();
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CreatedAt)
@@ -54,7 +54,7 @@ public partial class ELearningContext : DbContext
 
         modelBuilder.Entity<Course>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__courses__3213E83F78119B5B");
+            entity.HasKey(e => e.Id).HasName("PK__courses__3213E83FF6A285DC");
 
             entity.ToTable("courses");
 
@@ -79,7 +79,7 @@ public partial class ELearningContext : DbContext
 
         modelBuilder.Entity<CourseCategory>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__course_c__3213E83FFD551AF5");
+            entity.HasKey(e => e.Id).HasName("PK__course_c__3213E83F345A3232");
 
             entity.ToTable("course_categories");
 
@@ -99,17 +99,17 @@ public partial class ELearningContext : DbContext
             entity.HasOne(d => d.Category).WithMany(p => p.CourseCategories)
                 .HasForeignKey(d => d.CategoryId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__course_ca__categ__33D4B598");
+                .HasConstraintName("FK__course_ca__categ__35BCFE0A");
 
             entity.HasOne(d => d.Course).WithMany(p => p.CourseCategories)
                 .HasForeignKey(d => d.CourseId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__course_ca__cours__32E0915F");
+                .HasConstraintName("FK__course_ca__cours__34C8D9D1");
         });
 
         modelBuilder.Entity<Enrollment>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__enrollme__3213E83FE8A6196D");
+            entity.HasKey(e => e.Id).HasName("PK__enrollme__3213E83F04DC0418");
 
             entity.ToTable("enrollments");
 
@@ -129,17 +129,17 @@ public partial class ELearningContext : DbContext
             entity.HasOne(d => d.Course).WithMany(p => p.Enrollments)
                 .HasForeignKey(d => d.CourseId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__enrollmen__cours__37A5467C");
+                .HasConstraintName("FK__enrollmen__cours__398D8EEE");
 
             entity.HasOne(d => d.User).WithMany(p => p.Enrollments)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__enrollmen__user___36B12243");
+                .HasConstraintName("FK__enrollmen__user___38996AB5");
         });
 
         modelBuilder.Entity<Lesson>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__lessons__3213E83FA61ED860");
+            entity.HasKey(e => e.Id).HasName("PK__lessons__3213E83F6C7D5C04");
 
             entity.ToTable("lessons");
 
@@ -163,12 +163,12 @@ public partial class ELearningContext : DbContext
             entity.HasOne(d => d.Course).WithMany(p => p.Lessons)
                 .HasForeignKey(d => d.CourseId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__lessons__course___34C8D9D1");
+                .HasConstraintName("FK__lessons__course___36B12243");
         });
 
         modelBuilder.Entity<LessonContent>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__lesson_c__3213E83F1FFA7949");
+            entity.HasKey(e => e.Id).HasName("PK__lesson_c__3213E83F033FCB5B");
 
             entity.ToTable("lesson_contents");
 
@@ -196,12 +196,12 @@ public partial class ELearningContext : DbContext
             entity.HasOne(d => d.Lesson).WithMany(p => p.LessonContents)
                 .HasForeignKey(d => d.LessonId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__lesson_co__lesso__35BCFE0A");
+                .HasConstraintName("FK__lesson_co__lesso__37A5467C");
         });
 
         modelBuilder.Entity<LessonContentProgress>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__lesson_c__3213E83F8E8763C1");
+            entity.HasKey(e => e.Id).HasName("PK__lesson_c__3213E83F3D80A97A");
 
             entity.ToTable("lesson_content_progress");
 
@@ -225,26 +225,28 @@ public partial class ELearningContext : DbContext
             entity.HasOne(d => d.LessonContent).WithMany(p => p.LessonContentProgresses)
                 .HasForeignKey(d => d.LessonContentId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__lesson_co__lesso__398D8EEE");
+                .HasConstraintName("FK__lesson_co__lesso__3B75D760");
 
             entity.HasOne(d => d.User).WithMany(p => p.LessonContentProgresses)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__lesson_co__user___38996AB5");
+                .HasConstraintName("FK__lesson_co__user___3A81B327");
         });
 
         modelBuilder.Entity<RefreshToken>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__refresh___3213E83FC6A55D98");
+            entity.HasKey(e => e.Id).HasName("PK__refresh___3213E83F9500A583");
 
             entity.ToTable("refresh_tokens");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CreatedAt)
-                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
                 .HasColumnName("created_at");
             entity.Property(e => e.DeleteFlag).HasColumnName("delete_flag");
-            entity.Property(e => e.ExpiresAt).HasColumnName("expires_at");
+            entity.Property(e => e.ExpiresAt)
+                .HasColumnType("datetime")
+                .HasColumnName("expires_at");
             entity.Property(e => e.IpAddress)
                 .HasMaxLength(50)
                 .HasColumnName("ip_address");
@@ -252,12 +254,14 @@ public partial class ELearningContext : DbContext
             entity.Property(e => e.ReplacedBy)
                 .HasMaxLength(64)
                 .HasColumnName("replaced_by");
-            entity.Property(e => e.RevokedAt).HasColumnName("revoked_at");
+            entity.Property(e => e.RevokedAt)
+                .HasColumnType("datetime")
+                .HasColumnName("revoked_at");
             entity.Property(e => e.TokenHash)
                 .HasMaxLength(64)
                 .HasColumnName("token_hash");
             entity.Property(e => e.UpdatedAt)
-                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
                 .HasColumnName("updated_at");
             entity.Property(e => e.UserAgent)
                 .HasMaxLength(500)
@@ -267,12 +271,12 @@ public partial class ELearningContext : DbContext
             entity.HasOne(d => d.User).WithMany(p => p.RefreshTokens)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__refresh_tokens_users");
+                .HasConstraintName("FK__refresh_t__user___3C69FB99");
         });
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__users__3213E83FD0249377");
+            entity.HasKey(e => e.Id).HasName("PK__users__3213E83FB1D7DE57");
 
             entity.ToTable("users");
 
@@ -287,7 +291,9 @@ public partial class ELearningContext : DbContext
             entity.Property(e => e.ForgotPasswordToken)
                 .HasMaxLength(255)
                 .HasColumnName("forgot_password_token");
-            entity.Property(e => e.ForgotPasswordTokenExpire).HasColumnName("forgot_password_token_expire");
+            entity.Property(e => e.ForgotPasswordTokenExpire)
+                .HasColumnType("datetime")
+                .HasColumnName("forgot_password_token_expire");
             entity.Property(e => e.PasswordHash)
                 .HasMaxLength(500)
                 .HasColumnName("password_hash");
