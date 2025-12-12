@@ -44,7 +44,6 @@ namespace ELearningPlatform.Services.Implements
 
             };
             await _userRepository.CreateAsync(newUser);
-
             await _unitOfWork.CommitAsync();
             await _emailService.SendEmailAsync(newUser.Email, "Welcome to ELearning Platform", "Thank you for registering!");
             return ApiResponse.Response(DefineResponse.EnumCodes.R_CMN_200_01);
