@@ -30,12 +30,14 @@ namespace ELearningPlatform
             services.AddScoped<ICourseService, CourseService>();
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<ICategoryService, CategoryService>();
             #endregion
 
 
             #region Repositories
             services.AddScoped<ICourseRepository, CourseRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
             #endregion
 
             return services;
