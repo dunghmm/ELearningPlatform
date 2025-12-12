@@ -1,0 +1,6 @@
+services:
+  elearningplatform:
+    image: ${DOCKER_REGISTRY-}elearningplatform
+    build:
+      context: API
+      dockerfile: Dockerfile
