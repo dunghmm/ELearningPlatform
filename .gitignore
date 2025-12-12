@@ -58,4 +58,4 @@ nunit-*.xml
 *.user
 
 #Secrets
-/appsettings.Development.json
+API/appsettings.Development.json
