@@ -70,7 +70,15 @@ The following services will be started:
 * HTTPS: [https://localhost:8081/swagger](https://localhost:8081/swagger)
 
 
-### 5. Stop and remove containers
+### 5. Notes for developers
+
+* Local development uses `docker-compose.override.yml` to mount secrets and enable live reload.
+* Never commit `.env` or local secrets.
+* Use `.env.example` as the template when adding new secrets.
+
+---
+
+## Stop and remove containers
 
 ```bash
 docker compose down
@@ -78,12 +86,6 @@ docker compose down
 
 > This will stop containers but preserve database volumes. Use `docker compose down -v` instead if you want to reset the database. Keep in mind that changing `SA_PASSWORD` in `.env` requires you to reset the database.
 
-
-### 6. Notes for developers
-
-* Local development uses `docker-compose.override.yml` to mount secrets and enable live reload.
-* Never commit `.env` or local secrets.
-* Use `.env.example` as the template when adding new secrets.
 
 ---
 
