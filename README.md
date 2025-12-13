@@ -49,10 +49,10 @@ SMTP_PASSWORD=your-email-app-password
 
 **Notes:**
 
-* `SA_PASSWORD` is the SQL Server system administrator password.
+* `SA_PASSWORD` is the SQL Server system administrator password. It must contain at least 8 characters, including uppercase, lowercase letters, numbers, and symbols.
 * Email settings are used to send registration notification (for now).
 * `.env` is **not committed** to Git to keep your secrets safe.
-* Docker Compose automatically reads `.env` and injects these values into your containers via the `docker-compose.override.yml` file.
+* Docker Compose automatically reads `.env` for values and injects them into your containers via the `docker-compose.override.yml` file.
 
 ---
 
@@ -94,6 +94,17 @@ docker compose down
 * Local development uses `docker-compose.override.yml` to mount secrets and enable live reload.
 * Never commit `.env` or local secrets.
 * Use `.env.example` as the template when adding new secrets.
+
+---
+
+## Connecting to the container's database using SSMS
+
+1. Open SQL Server Management Studio (SSMS).
+
+2. Connect to the database server using the following details:
+   - **Server name**: `localhost,1433`
+   - **Authentication**: SQL Server Authentication
+   - **Login**: Enter username `sa` and password from your `.env` file.
 
 ---
 
