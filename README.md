@@ -78,7 +78,7 @@ The following services will be started:
 
 ---
 
-## Stop and remove containers
+## Stopping and removing containers
 
 ```bash
 docker compose down
@@ -89,7 +89,7 @@ docker compose down
 
 ---
 
-## Connecting to the container's database using SSMS
+## Connecting to container's database using SSMS
 
 1. Open SQL Server Management Studio (SSMS).
 
