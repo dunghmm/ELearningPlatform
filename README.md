@@ -20,8 +20,6 @@ git clone https://github.com/dunghmm/ELearningPlatform.git
 cd ELearningPlatform
 ````
 
----
-
 ### 2. Setup environment variables
 
 The project uses a `.env` file to store sensitive information like database credentials and SMTP email settings.
@@ -54,8 +52,6 @@ SMTP_PASSWORD=your-email-app-password
 * `.env` is **not committed** to Git to keep your secrets safe.
 * Docker Compose automatically reads `.env` for values and injects them into your containers via the `docker-compose.override.yml` file.
 
----
-
 ### 3. Run the application with Docker Compose
 
 ```bash
@@ -68,15 +64,11 @@ The following services will be started:
 * `elearningplatform` → ASP.NET Core Web API
 * `mssql-tools` → Utility container for database initialization
 
----
-
 ### 4. Access Swagger
 
 * HTTP: [http://localhost:8080/swagger](http://localhost:8080/swagger)
 * HTTPS: [https://localhost:8081/swagger](https://localhost:8081/swagger)
 
-
----
 
 ### 5. Stop and remove containers
 
@@ -86,8 +78,6 @@ docker compose down
 
 > This will stop containers but preserve database volumes. Use `docker compose down -v` instead if you want to reset the database. Keep in mind that changing `SA_PASSWORD` in `.env` requires you to reset the database.
 
-
----
 
 ### 6. Notes for developers
 
